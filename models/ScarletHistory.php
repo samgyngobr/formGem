@@ -59,11 +59,7 @@ class ScarletHistory extends Model
 
     public function getDataForm( $fields, $config )
     {
-
         $data = $this->getData( $config );
-
-        //var_dump($fields); //die;
-        //var_dump($data); die;
 
         if( $data )
         {
@@ -99,9 +95,6 @@ class ScarletHistory extends Model
 
     public function insert( $arr, &$db = null, &$transaction = null )
     {
-
-        //var_dump($arr); die;
-
         if( !$db )
             $db = Yii::$app->db;
 

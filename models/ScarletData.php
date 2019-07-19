@@ -244,8 +244,6 @@ class ScarletData extends Model
 
     public function validate_( $arr, $acao = '' )
     {
-        //var_dump($arr); die;
-
         foreach ( $arr['fields'] as $key => $v )
         {
 
@@ -309,10 +307,6 @@ class ScarletData extends Model
             } // switch ( $v['type'] ) {
 
         } // foreach ( $arr['fields'] as $key => $v ) {
-
-
-        //var_dump($arr); die;
-
 
         return $arr;
     }

@@ -28,8 +28,6 @@ class ScarletHelper extends Component
 
         foreach ($fields as $key => $value)
         {
-            //var_dump( $value );
-
             $required = ( $value['required'] ) ? 'required' : '';
 
             switch ( $value['type'] )
@@ -214,11 +212,6 @@ class ScarletHelper extends Component
 
     public function listGen( $data, $fieldLabels, $area )
     {
-        //var_dump( $data );
-        //var_dump( $fieldLabels );
-        //var_dump( $area );
-        //die;
-
         $labels = [];
 
         $str = '<table id="datatable" class="table table-bordered table-hover">';

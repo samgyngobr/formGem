@@ -25,7 +25,6 @@ class DefaultController extends Controller
             $this->redirect('@adminRootLogin');
 
         $this->enableCsrfValidation = false;
-        $this->layout               = '/adminto'; // layout de exibição
     }
 
 
@@ -230,11 +229,8 @@ class DefaultController extends Controller
         }
         catch(Exception $e)
         {
-            var_dump($e);die;
             $_SESSION['error'][] = $e->getMessage();
         }
-
-        //var_dump($dados); die;
 
         return $this->render( 'galeria', $dados );
     }

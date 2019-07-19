@@ -179,8 +179,6 @@ class ScarletArea extends Model
     {
         try
         {
-            //var_dump( $arr ); die;
-
             $fields = json_decode( $arr['json'], true );
 
             Yii::$app->db->createCommand()->update( 'scarlet_area', ['label' => $arr['name'] ], 'id=' . $arr['id'] )->execute();

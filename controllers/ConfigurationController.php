@@ -27,7 +27,6 @@ class ConfigurationController extends Controller
             $this->redirect('@adminRootLogin');
 
         $this->enableCsrfValidation = false;
-        $this->layout               = '/adminto'; // layout de exibição
     }
 
 
@@ -75,7 +74,6 @@ class ConfigurationController extends Controller
         }
         catch(Exception $e)
         {
-            var_dump( $e ); die;
             $_SESSION['error'][] = $e->getMessage();
         }
 
