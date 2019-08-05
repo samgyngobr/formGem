@@ -60,7 +60,7 @@ $this->title = $config['area']['label'];
 
             <div class="panel-body">
 
-                <?php echo Yii::$app->ScarletHelper->listGen( $config['data'], $config['fieldLabels'], $config['area'] ); ?>
+                <?= Yii::$app->ScarletHelper->listGen( $config['data'], $config['fieldLabels'], $config['area'] ); ?>
 
             </div>
 

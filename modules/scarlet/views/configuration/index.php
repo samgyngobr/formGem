@@ -45,12 +45,13 @@ $this->title = 'Configuração';
                     <tbody>
                         <?php
 
-                        if( isset($areas) and count($areas)>0 ){
-
-                            foreach ( $areas as $line ) {
+                        if( isset($areas) and count($areas)>0 )
+                        {
+                            foreach ( $areas as $line )
+                            {
                                 ?>
                                 <tr>
-                                    <td><?= $line['label'];   ?></td>
+                                    <td><?= $line['label']; ?></td>
                                     <td><?= ( $line['gallery'] == 1 ) ? 'Sim' : 'Não' ; ?></td>
                                     <td>
                                         <?php if($line['status'] == 1){ ?>

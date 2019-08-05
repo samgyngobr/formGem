@@ -9,7 +9,6 @@ $this->title = $config['area']['label'] . ( ( isset($config['acao']) AND $config
 
         <?php
 
-
         if (
             ( isset( $error ) and $error != '' ) or
             ( isset( $_SESSION['error'] ) AND !is_array( $_SESSION['error'] ) AND $_SESSION['error'] != '' ) or
@@ -64,7 +63,7 @@ $this->title = $config['area']['label'] . ( ( isset($config['acao']) AND $config
 
             <div class="panel-body">
 
-                <?php echo Yii::$app->ScarletHelper->formGen( $config['fields'], $acao ); ?>
+                <?= Yii::$app->ScarletHelper->formGen( $config['fields'], $acao ); ?>
 
             </div>
 
