@@ -1,3 +1,3 @@
 # FormGem
 
-This project is a new php class.
+Classe geradora de Formulários utilizando o framework Yii2
