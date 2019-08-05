@@ -44,6 +44,12 @@ class Scarlet
 
 
 
+    /**
+     * List Areas
+     *
+     * @param array $query
+     * @return array
+     */
     public function listarAreas( $query = null )
     {
         return ( new ScarletArea() )->listar( $query );
@@ -53,6 +59,12 @@ class Scarlet
 
 
 
+    /**
+     * Set current area
+     *
+     * @param string $area
+     * @return void
+     */
     public function setArea( $area )
     {
         $this->area  = $area;
@@ -63,6 +75,11 @@ class Scarlet
 
 
 
+    /**
+     * get area
+     *
+     * @return array
+     */
     public function getArea()
     {
         return $this->oArea;
@@ -72,6 +89,11 @@ class Scarlet
 
 
 
+    /**
+     * List Content
+     *
+     * @return array
+     */
     public function listar()
     {
         $area    = $this->oArea->detalhes();
@@ -89,6 +111,11 @@ class Scarlet
 
 
 
+    /**
+     * New
+     *
+     * @return array
+     */
     public function novo()
     {
         $area    = $this->oArea->detalhes();

@@ -12,6 +12,12 @@ class ScarletVersion extends Model
 
 
 
+    /**
+     * get version
+     *
+     * @param string $area
+     * @return array
+     */
     public function getAtual( $area )
     {
         $x = Yii::$app->db->createCommand( "SELECT * FROM scarlet_version WHERE area_id=:area_id AND active=:active" )

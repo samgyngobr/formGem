@@ -13,7 +13,12 @@ class ScarletHelper extends Component
 {
 
 
-
+    /**
+     * List content
+     *
+     * @param array $query
+     * @return array
+     */
     public function listar( $query = null )
     {
         return ( new Scarlet() )->listarAreas( 'WHERE status=1 ' );
@@ -21,6 +26,13 @@ class ScarletHelper extends Component
 
 
 
+    /**
+     * Generate Form
+     *
+     * @param array $fields
+     * @param string $acao
+     * @return string
+     */
     public function formGen( $fields, $acao )
     {
 
@@ -33,7 +45,7 @@ class ScarletHelper extends Component
             switch ( $value['type'] )
             {
 
-                case '1':
+                case '1': // text
                     $str .= '
                     <div class="form-group">
                         <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
@@ -45,7 +57,7 @@ class ScarletHelper extends Component
                     break;
 
 
-                case '2':
+                case '2': // integer
                     $str .= '
                     <div class="form-group">
                         <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
@@ -57,7 +69,7 @@ class ScarletHelper extends Component
                     break;
 
 
-                case '3':
+                case '3': // double
                     $str .= '
                     <div class="form-group">
                         <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
@@ -69,7 +81,7 @@ class ScarletHelper extends Component
                     break;
 
 
-                case '4':
+                case '4': // TextArea
                     $str .= '
                     <div class="form-group">
                         <label class="control-label col-md-2" for="' . $value['name'] . '">' . $value['label'] . '</label>
@@ -81,7 +93,7 @@ class ScarletHelper extends Component
                     break;
 
 
-                case '5':
+                case '5': // select
                     $str .= '
                     <div class="form-group">
                         <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
@@ -101,7 +113,7 @@ class ScarletHelper extends Component
                     break;
 
 
-                case '6':
+                case '6': // radio
                     $str .= '
                     <div class="form-group">
                         <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
@@ -123,7 +135,7 @@ class ScarletHelper extends Component
                     break;
 
 
-                case '7':
+                case '7': // checkbox
                     $str .= '
                     <div class="form-group">
                         <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
@@ -145,7 +157,7 @@ class ScarletHelper extends Component
                     break;
 
 
-                case '8':
+                case '8': // image
                     if( !isset( $value['value'] ) )
                         $btn = '<input type="file" class="form-control" name="' . $value['name'] . '" ' . ( ( $acao=='editar' ) ? '' : $required ) . ' >';
                     else
@@ -166,7 +178,7 @@ class ScarletHelper extends Component
                     break;
 
 
-                case '9':
+                case '9': // upload
                     if( !isset( $value['value'] ) )
                         $btn = '<input type="file" class="form-control" name="' . $value['name'] . '" ' . ( ( $acao=='editar' ) ? '' : $required ) . ' >';
                     else
@@ -187,10 +199,10 @@ class ScarletHelper extends Component
                     break;
 
 
-            } // switch ( $value['type'] ) {
+            } // switch ( $value['type'] )
 
 
-        } // foreach ($fields as $key => $value) {
+        } // foreach ($fields as $key => $value)
 
 
         $str .= '<div class="form-group form-actions">
@@ -210,6 +222,14 @@ class ScarletHelper extends Component
 
 
 
+    /**
+     * Generate Table
+     *
+     * @param array $data
+     * @param array $fieldLabels
+     * @param array $area
+     * @return string
+     */
     public function listGen( $data, $fieldLabels, $area )
     {
         $labels = [];
@@ -260,7 +280,7 @@ class ScarletHelper extends Component
 
                 $str .= '</tr>';
 
-            } // foreach( $data as $k => $v ){
+            } // foreach( $data as $k => $v )
 
             $str .= '</tbody>';
 
@@ -272,9 +292,15 @@ class ScarletHelper extends Component
 
 
 
+    /**
+     * string2url
+     *
+     * @param string $string
+     * @return string
+     */
     public function urlAmigavel($string)
     {
-        $url = str_replace(' ', '_', urldecode($string));
+        $url = str_replace(' ', '-', urldecode($string));
         $url = preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities($url));
 
         $url = str_replace('_', '-', $url);

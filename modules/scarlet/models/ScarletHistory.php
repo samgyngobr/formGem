@@ -35,6 +35,12 @@ class ScarletHistory extends Model
 
 
 
+    /**
+     * get Data
+     *
+     * @param array $config
+     * @return array
+     */
     public function getData( $config )
     {
 
@@ -56,7 +62,13 @@ class ScarletHistory extends Model
 
 
 
-
+    /**
+     * get form data
+     *
+     * @param array $fields
+     * @param array $config
+     * @return array
+     */
     public function getDataForm( $fields, $config )
     {
         $data = $this->getData( $config );
@@ -66,8 +78,9 @@ class ScarletHistory extends Model
             foreach ($fields as &$value)
             {
 
-                $aux = Yii::$app->db->createCommand( "SELECT * FROM ".$this->tInput[ $value['type'] ]." WHERE history_id=:history_id AND field_id=:field_id" )
+                $aux = Yii::$app->db->createCommand( "SELECT * FROM :type WHERE history_id=:history_id AND field_id=:field_id" )
                     ->bindValues([
+                        ':type'       => $this->tInput[ $value['type'] ],
                         ':history_id' => $data['id'],
                         ':field_id'   => $value['id'],
                         ])
@@ -80,9 +93,9 @@ class ScarletHistory extends Model
                     $value['value'] = '';
 
 
-            } // foreach ($fields as &$value) {
+            } // foreach ($fields as &$value)
 
-        } // if( $data ){
+        } // if( $data )
 
 
         return $fields;
@@ -93,6 +106,14 @@ class ScarletHistory extends Model
 
 
 
+    /**
+     * Insert
+     *
+     * @param Array $arr
+     * @param Object $db
+     * @param Object $transaction
+     * @return void
+     */
     public function insert( $arr, &$db = null, &$transaction = null )
     {
         if( !$db )
@@ -175,6 +196,12 @@ class ScarletHistory extends Model
 
 
 
+    /**
+     * get id using id
+     *
+     * @param int $data_id
+     * @return array
+     */
     public function getById( $data_id )
     {
 
@@ -201,7 +228,12 @@ class ScarletHistory extends Model
 
 
 
-
+    /**
+     * List
+     *
+     * @param array $hist
+     * @return array
+     */
     public function getList( $hist )
     {
 
@@ -256,6 +288,13 @@ class ScarletHistory extends Model
 
 
 
+    /**
+     * basic list
+     *
+     * @param id $data_id
+     * @param int $version
+     * @return array
+     */
     public function listarBasic( $data_id, $version )
     {
 
