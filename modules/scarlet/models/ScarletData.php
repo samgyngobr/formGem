@@ -20,7 +20,13 @@ class ScarletData extends Model
 
 
 
-
+    /**
+     * get data
+     *
+     * @param int $area
+     * @param boolean $published
+     * @return array
+     */
     public function getData( $area, $published = false )
     {
         $st = '';
@@ -43,6 +49,13 @@ class ScarletData extends Model
 
 
 
+    /**
+     * get data using url
+     *
+     * @param int $area
+     * @param string $url
+     * @return array
+     */
     public function getDataUrl( $area, $url )
     {
         $x = Yii::$app->db->createCommand( "SELECT * FROM $this->table WHERE area_id=:area AND url=:url" )
@@ -62,6 +75,12 @@ class ScarletData extends Model
 
 
 
+    /**
+     * get current data
+     *
+     * @param int $area
+     * @return array
+     */
     public function getAtual( $area )
     {
         $x = Yii::$app->db->createCommand( "SELECT * FROM $this->table WHERE area_id=:area_id" )
@@ -116,6 +135,13 @@ class ScarletData extends Model
 
 
 
+    /**
+     * get basic list
+     *
+     * @param integer $area
+     * @param integer $version
+     * @return array
+     */
     public function getListBasic( $area, $version )
     {
         $list = Yii::$app->db->createCommand( " SELECT * FROM $this->table WHERE deleted=0 AND area_id=:area_id " )
@@ -128,11 +154,18 @@ class ScarletData extends Model
             $value['fields'] = ( new ScarletHistory() )->listarBasic( $value['id'], $version );
 
         return $list;
-
     }
 
 
 
+    /**
+     * getListRaw
+     *
+     * @param integer $area
+     * @param integer $version
+     * @param boolean $published
+     * @return array
+     */
     public function getListRaw( $area, $version, $published = false )
     {
         $st = '';
@@ -147,13 +180,18 @@ class ScarletData extends Model
             ->queryAll();
 
         return $list;
-
     }
 
 
 
 
 
+    /**
+     * new
+     *
+     * @param array $arr
+     * @return void
+     */
     public function novo( $arr )
     {
         try
@@ -194,10 +232,17 @@ class ScarletData extends Model
 
             throw $e;
         }
-
     }
 
 
+
+
+    /**
+     * Edit
+     *
+     * @param array $arr
+     * @return void
+     */
     public function editar( $arr )
     {
         try
@@ -215,6 +260,12 @@ class ScarletData extends Model
 
 
 
+    /**
+     * delete
+     *
+     * @param integer $id
+     * @return void
+     */
     public function delete( $id )
     {
         Yii::$app->db->createCommand()->update( $this->table, ['deleted' => 1], 'id=' . $id )->execute();
@@ -224,6 +275,12 @@ class ScarletData extends Model
 
 
 
+    /**
+     * publish
+     *
+     * @param integer $id
+     * @return void
+     */
     public function publicar( $id )
     {
         Yii::$app->db->createCommand()->update( $this->table, ['published' => 1], 'id=' . $id )->execute();
@@ -233,6 +290,12 @@ class ScarletData extends Model
 
 
 
+    /**
+     * remove publish status
+     *
+     * @param integer $id
+     * @return void
+     */
     public function removerPublicacao( $id )
     {
         Yii::$app->db->createCommand()->update( $this->table, ['published' => 0], 'id=' . $id )->execute();
@@ -242,11 +305,17 @@ class ScarletData extends Model
 
 
 
+    /**
+     * validate
+     *
+     * @param array $arr
+     * @param string $acao
+     * @return void
+     */
     public function validate_( $arr, $acao = '' )
     {
         foreach ( $arr['fields'] as $key => $v )
         {
-
             switch ( $v['type'] )
             {
 
@@ -315,6 +384,13 @@ class ScarletData extends Model
 
 
 
+    /**
+     * process tcontentext
+     *
+     * @param array $input
+     * @param array $post
+     * @return array
+     */
     public function processText( $input, $post )
     {
         return $post;
@@ -324,6 +400,14 @@ class ScarletData extends Model
 
 
 
+
+    /**
+     * process tcontentext
+     *
+     * @param array $input
+     * @param array $post
+     * @return array
+     */
     public function processTextArea( $input, $post )
     {
         return $post;
@@ -332,7 +416,13 @@ class ScarletData extends Model
 
 
 
-
+    /**
+     * process tcontentext
+     *
+     * @param array $input
+     * @param array $post
+     * @return array
+     */
     public function processInteger( $input, $post )
     {
         if( !is_numeric( $post ) AND !strpos( $post, '.' ) )
@@ -344,7 +434,13 @@ class ScarletData extends Model
 
 
 
-
+    /**
+     * process tcontentext
+     *
+     * @param array $input
+     * @param array $post
+     * @return array
+     */
     public function processDouble( $input, $post )
     {
         if( !is_numeric( $post ) AND strpos( $post, '.' ) )
@@ -356,7 +452,13 @@ class ScarletData extends Model
 
 
 
-
+    /**
+     * process tcontentext
+     *
+     * @param array $input
+     * @param array $post
+     * @return array
+     */
     public function processSelect( $input, $post )
     {
         return $post;
@@ -365,7 +467,13 @@ class ScarletData extends Model
 
 
 
-
+    /**
+     * process tcontentext
+     *
+     * @param array $input
+     * @param array $post
+     * @return array
+     */
     public function processRadio( $input, $post )
     {
         return $post;
@@ -374,7 +482,13 @@ class ScarletData extends Model
 
 
 
-
+    /**
+     * process tcontentext
+     *
+     * @param array $input
+     * @param array $post
+     * @return array
+     */
     public function processCheckbox( $input, $post )
     {
         return $post;
@@ -383,7 +497,13 @@ class ScarletData extends Model
 
 
 
-
+    /**
+     * process tcontentext
+     *
+     * @param array $input
+     * @param array $post
+     * @return array
+     */
     public function processImage( $input, $post, $acao )
     {
 
@@ -410,7 +530,13 @@ class ScarletData extends Model
 
 
 
-
+    /**
+     * process tcontentext
+     *
+     * @param array $input
+     * @param array $post
+     * @return array
+     */
     public function processUpload( $input, $post, $acao )
     {
 
@@ -446,8 +572,13 @@ class ScarletData extends Model
 
 
 
-
-    public function str2Url($string)
+    /**
+     * encode url
+     *
+     * @param string $string
+     * @return string
+     */
+    public function str2Url( $string )
     {
         $url = str_replace(' ', '_', urldecode($string));
         $url = preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities($url));
@@ -509,9 +640,16 @@ class ScarletData extends Model
     */
 
 
+    /**
+     * search in content
+     *
+     * @param integer $area
+     * @param integer $version
+     * @param array $op
+     * @return array
+     */
     public function search( $area, $version, array $op )
     {
-
         $whrr = $this->genWhere( $op );
 
         if( $whrr != '' )
@@ -549,6 +687,12 @@ class ScarletData extends Model
 
 
 
+    /**
+     * create a "where"
+     *
+     * @param array $op
+     * @return string
+     */
     private function genWhere( array $op )
     {
         $str = '';
@@ -560,9 +704,7 @@ class ScarletData extends Model
                 $str .= '(';
 
                 foreach ($value as $k => $v)
-                {
                     $str .= $this->genWhere( [ $v ] );
-                }
 
                 $str .= ')';
             }
@@ -577,6 +719,14 @@ class ScarletData extends Model
 
 
 
+    /**
+     * genTxt
+     *
+     * @param string $field
+     * @param string $str
+     * @param string $op
+     * @return string
+     */
     private function genTxt( $field, $str, $op )
     {
         return "
