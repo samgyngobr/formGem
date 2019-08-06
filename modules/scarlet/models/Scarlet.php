@@ -134,7 +134,12 @@ class Scarlet
 
 
 
-
+    /**
+     * Find using id
+     *
+     * @param integer $id
+     * @return array
+     */
     public function findId( $id )
     {
         $area    = $this->oArea->detalhes();
@@ -155,6 +160,12 @@ class Scarlet
 
 
 
+    /**
+     * find using url
+     *
+     * @param string $url
+     * @return array
+     */
     public function findUrl( $url )
     {
         $area    = $this->oArea->detalhes();
@@ -176,10 +187,14 @@ class Scarlet
 
 
 
-
+    /**
+     * get content to Edit
+     *
+     * @param id $id
+     * @return array
+     */
     public function editar( $id )
     {
-
         $area    = $this->oArea->detalhes();
         $version = ( new ScarletVersion() )->getAtual( $area['id'] );
 
@@ -210,6 +225,12 @@ class Scarlet
 
 
 
+    /**
+     * del
+     *
+     * @param integer $id
+     * @return void
+     */
     public function excluir( $id )
     {
         try
@@ -229,6 +250,12 @@ class Scarlet
 
 
 
+    /**
+     * remove published
+     *
+     * @param integer $id
+     * @return boolean
+     */
     public function removerPublicacao( $id )
     {
         try
@@ -240,8 +267,8 @@ class Scarlet
         catch(Exception $e)
         {
             $this->error = $e->getMessage();
+            return false;
         }
-
     }
 
 
@@ -249,6 +276,12 @@ class Scarlet
 
 
 
+    /**
+     * publish
+     *
+     * @param integer $id
+     * @return boolean
+     */
     public function publicar( $id )
     {
         try
@@ -260,14 +293,19 @@ class Scarlet
         catch(Exception $e)
         {
             $this->error = $e->getMessage();
+            return false;
         }
-
     }
 
 
 
 
 
+    /**
+     * get unique current date
+     *
+     * @return array
+     */
     public function uniqueData()
     {
         $area = $this->oArea->detalhes();
@@ -279,6 +317,15 @@ class Scarlet
 
 
 
+    /**
+     * save content
+     *
+     * @param string $acao
+     * @param array $post
+     * @param integer $creator
+     * @param integer $id
+     * @return void
+     */
     public function save( $acao, $post, $creator, $id = null )
     {
         $area   = $this->oArea->detalhes();
@@ -295,7 +342,7 @@ class Scarlet
                 'creator' => $creator,
             ]);
         }
-        // if( $this->acao == 'novo' ){
+        // if( $this->acao == 'novo' )
         elseif( $acao == 'editar' )
         {
 
@@ -318,17 +365,13 @@ class Scarlet
                 'creator' => $creator,
             ]);
 
-
         }
-        // if( $this->acao == 'editar' ){
+        // if( $this->acao == 'editar' )
         else
         {
             throw new Exception("Operação não encontrada!", 1);
         }
-        // if( $this->acao == 'novo' ){
-
-
-
+        // if( $this->acao == 'novo' )
     }
 
 
@@ -338,6 +381,11 @@ class Scarlet
 
 
 
+    /**
+     * get unique date
+     *
+     * @return array
+     */
     public function fetchUnique()
     {
         $area = $this->oArea->detalhes();
@@ -372,6 +420,11 @@ class Scarlet
 
 
 
+    /**
+     * get date
+     *
+     * @return array
+     */
     public function fetch()
     {
 
@@ -389,7 +442,7 @@ class Scarlet
             foreach ($fields as $key => $value)
                 $v[ $value['name'] ] = ( isset( $currentHistory[ $value['name'] ] ) ) ? $currentHistory[ $value['name'] ] : null;
 
-        } // foreach ($data as $key => &$value) {
+        } // foreach ($data as $key => &$value)
 
         return $data;
     }
@@ -400,6 +453,12 @@ class Scarlet
 
 
 
+    /**
+     * search
+     *
+     * @param array $op
+     * @return array
+     */
     public function search(array $op = [])
     {
         $area    = $this->oArea->detalhes();
@@ -412,6 +471,12 @@ class Scarlet
 
 
 
+    /**
+     * new
+     *
+     * @param array $arr
+     * @return void
+     */
     public function newArea(array $arr = [])
     {
         ( new ScarletArea() )->novo( $arr );
@@ -420,6 +485,12 @@ class Scarlet
 
 
 
+    /**
+     * edit area
+     *
+     * @param array $arr
+     * @return void
+     */
     public function edtArea(array $arr = [])
     {
         $area      = $this->oArea->detalhes();
@@ -431,6 +502,12 @@ class Scarlet
 
 
 
+    /**
+     * edit view
+     *
+     * @param array $arr
+     * @return array
+     */
     public function edtView( array $arr = [] )
     {
         $area    = $this->oArea->detalhes();

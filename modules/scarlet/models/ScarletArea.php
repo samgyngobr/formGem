@@ -16,6 +16,11 @@ class ScarletArea extends Model
 
 
 
+    /**
+     * set current area
+     *
+     * @param string $area
+     */
     public function __construct( $area = null )
     {
         if( $area )
@@ -31,6 +36,12 @@ class ScarletArea extends Model
 
 
 
+    /**
+     * list content
+     *
+     * @param string $query
+     * @return array
+     */
     public function listar( $query = null )
     {
         return Yii::$app->db->createCommand("SELECT * FROM scarlet_area $query")->queryAll();
@@ -38,6 +49,11 @@ class ScarletArea extends Model
 
 
 
+    /**
+     * details
+     *
+     * @return array
+     */
     public function detalhes()
     {
         $x = Yii::$app->db->createCommand( "SELECT * FROM scarlet_area WHERE id=:id" )
@@ -54,6 +70,12 @@ class ScarletArea extends Model
 
 
 
+    /**
+     * details using url
+     *
+     * @param string $url
+     * @return array
+     */
     public function detalhesURL( $url )
     {
         $x = Yii::$app->db->createCommand( "SELECT * FROM scarlet_area WHERE url=:url" )
@@ -69,6 +91,12 @@ class ScarletArea extends Model
 
 
 
+    /**
+     * get details using id
+     *
+     * @param Integer $id
+     * @return Array
+     */
     public function detalhesId( $id )
     {
         $x = Yii::$app->db->createCommand( "SELECT * FROM scarlet_area WHERE id=:id" )
@@ -88,6 +116,12 @@ class ScarletArea extends Model
 
 
 
+    /**
+     * new
+     *
+     * @param array $arr
+     * @return void
+     */
     public function novo( $arr )
     {
         try
@@ -175,6 +209,12 @@ class ScarletArea extends Model
 
 
 
+    /**
+     * Edit content
+     *
+     * @param array $arr
+     * @return void
+     */
     public function edit( $arr )
     {
         try
@@ -255,6 +295,11 @@ class ScarletArea extends Model
 
 
 
+    /**
+     * activate
+     *
+     * @return void
+     */
     public function ativarArea()
     {
         Yii::$app->db->createCommand()->update( 'scarlet_area', ['status' => 1], 'id=' . $this->area )->execute();
@@ -262,6 +307,11 @@ class ScarletArea extends Model
 
 
 
+    /**
+     * disable
+     *
+     * @return void
+     */
     public function desativarArea()
     {
         Yii::$app->db->createCommand()->update( 'scarlet_area', ['status' => 0], 'id=' . $this->area )->execute();
