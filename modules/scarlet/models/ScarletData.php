@@ -426,7 +426,7 @@ class ScarletData extends Model
     public function processInteger( $input, $post )
     {
         if( !is_numeric( $post ) AND !strpos( $post, '.' ) )
-            throw new Exception("Campo \"" . $input['label'] . "\" Precisa ser número inteiro!", 1);
+            throw new Exception('Campo "' . $input['label'] . '" Precisa ser número inteiro!', 1);
 
         return $post;
     }
@@ -444,7 +444,7 @@ class ScarletData extends Model
     public function processDouble( $input, $post )
     {
         if( !is_numeric( $post ) AND strpos( $post, '.' ) )
-            throw new Exception("Campo \"" . $input['label'] . "\" Precisa ser número decimal!", 1);
+            throw new Exception('Campo "' . $input['label'] . '" Precisa ser número decimal!', 1);
 
         return $post;
     }
