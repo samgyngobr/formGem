@@ -91,7 +91,7 @@ class DefaultController extends Controller
                     $_SESSION['error'][] = $e->getMessage();
                 }
 
-            } // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 
             if( $area['multiple'] )

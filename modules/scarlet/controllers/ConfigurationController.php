@@ -42,14 +42,30 @@ class ConfigurationController extends Controller
         try
         {
             $areas = ( new Scarlet() )->listarAreas();
+
+
+            if($_SESSION['error'] != '')
+            {
+                $error             = $_SESSION['error'];
+                $_SESSION['error'] = '';
+            }
+
+            if($_SESSION['success'] != '')
+            {
+                $success             = $_SESSION['success'];
+                $_SESSION['success'] = '';
+            }
+
         }
         catch(Exception $e)
         {
-            $_SESSION['error'][] = $e->getMessage();
+            $error = $e->getMessage();
         }
 
         return $this->render( 'index', [
-            'areas' => $areas,
+            'areas'   => $areas,
+            'error'   => $error,
+            'success' => $success,
         ]);
     }
 
@@ -74,7 +90,7 @@ class ConfigurationController extends Controller
         }
         catch(Exception $e)
         {
-            $_SESSION['error'][] = $e->getMessage();
+            $dados['error'] = $e->getMessage();
         }
 
         return $this->render( 'novo', [
@@ -110,8 +126,8 @@ class ConfigurationController extends Controller
         }
         catch(Exception $e)
         {
-            $dados['post']       = ( isset( $post ) ) ? $post : null;
-            $_SESSION['error'][] = $e->getMessage();
+            $dados['post']  = ( isset( $post ) ) ? $post : null;
+            $dados['error'] = $e->getMessage();
         }
 
         return $this->render( 'editar', $dados );
@@ -125,26 +141,14 @@ class ConfigurationController extends Controller
     {
         try
         {
-            $dados        = [];
-            $dados['url'] = Yii::$app->request->get('url');   // parametro passado pela url referente ao registro do banco
-
-            ( new ScarletArea( $dados['url'] ) )->ativarArea();
+            ( new ScarletArea( Yii::$app->request->get('url') ) )->ativarArea();
         }
         catch(Exception $e)
         {
-            $_SESSION['error'][] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage();
         }
 
-        try
-        {
-            $dados['areas'] = ( new ScarletArea() )->listar();
-        }
-        catch(Exception $e)
-        {
-            $_SESSION['error'][] = $e->getMessage();
-        }
-
-        return $this->render( 'index', $dados );
+        return $this->redirect('@web/scarlet/configuration');
     }
 
 
@@ -156,26 +160,14 @@ class ConfigurationController extends Controller
     {
         try
         {
-            $dados        = [];
-            $dados['url'] = Yii::$app->request->get('url');   // parametro passado pela url referente ao registro do banco
-
-            ( new ScarletArea( $dados['url'] ) )->desativarArea();
+            ( new ScarletArea( Yii::$app->request->get('url') ) )->desativarArea();
         }
         catch(Exception $e)
         {
-            $_SESSION['error'][] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage();
         }
 
-        try
-        {
-            $dados['areas'] = ( new ScarletArea() )->listar();
-        }
-        catch(Exception $e)
-        {
-            $_SESSION['error'][] = $e->getMessage();
-        }
-
-        return $this->render( 'index', $dados );
+        return $this->redirect('@web/scarlet/configuration');
     }
 
 
