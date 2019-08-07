@@ -44,7 +44,7 @@ class ScarletArea extends Model
      */
     public function listar( $query = null )
     {
-        return Yii::$app->db->createCommand("SELECT * FROM scarlet_area {$query}")->queryAll();
+        return Yii::$app->db->createCommand( "SELECT * FROM scarlet_area {$query}" )->queryAll();
     }
 
 
@@ -124,7 +124,7 @@ class ScarletArea extends Model
         {
             $url = Yii::$app->ScarletHelper->urlAmigavel( $arr['name'] );
 
-            if( Yii::$app->db->createCommand("SELECT * FROM scarlet_area WHERE url LIKE '{$url}' ")->queryOne() )
+            if( Yii::$app->db->createCommand( "SELECT * FROM scarlet_area WHERE url LIKE '{$url}' ")->queryOne() )
                 throw new Exception("Título Inválido", 1);
 
             $fields = json_decode( $arr['json'], true );

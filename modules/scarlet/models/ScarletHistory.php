@@ -130,7 +130,7 @@ class ScarletHistory extends Model
         try
         {
 
-            Yii::$app->db->createCommand()->update( $this->table, ['current' => 0], 'data_id=' . $arr['data_id'] )->execute();
+            Yii::$app->db->createCommand()->update( $this->table, ['current' => 0], [ 'data_id' => $arr['data_id'] ] )->execute();
 
             // cria nova versao
             Yii::$app->db->createCommand()->insert( $this->table, [
@@ -180,7 +180,6 @@ class ScarletHistory extends Model
         }
         catch(\Exception $e)
         {
-
             if( !$ti )
                 $transaction->rollBack();
 
@@ -206,9 +205,7 @@ class ScarletHistory extends Model
     {
 
         $hist = Yii::$app->db->createCommand( "SELECT * FROM scarlet_history WHERE data_id=:data_id ORDER BY date_creation DESC" )
-            ->bindValues([
-                ':data_id' => $data_id,
-                ])
+            ->bindValues([ ':data_id' => $data_id ])
             ->queryOne();
 
         if(count($hist)==0)
@@ -216,6 +213,7 @@ class ScarletHistory extends Model
 
 
         $historico = $this->getList( $hist );
+
 
         if(!$historico)
             return false;
@@ -265,23 +263,23 @@ class ScarletHistory extends Model
 
             // checkbox pode possuir mais de um valor
             if( $v['type'] == 7 )
-                $ss .= '( SELECT GROUP_CONCAT( value separator ";" ) FROM ' . $this->tInput[$v['type']] . ' WHERE history_id=d and field_id='.$v['id'].' ) as "' . $v['name'] . '" ';
+                $ss .= " ( SELECT GROUP_CONCAT( value separator ';' ) FROM {$this->tInput[$v['type']]} WHERE history_id=d and field_id={$v['id']} ) as '{$v['name']}' ";
             else
-                $ss .= ' ( SELECT value FROM ' . $this->tInput[$v['type']] . ' WHERE history_id=d and field_id='.$v['id'].' ) as "' . $v['name'] . '" ';
+                $ss .= " ( SELECT value FROM {$this->tInput[$v['type']]} WHERE history_id=d and field_id={$v['id']} ) as '{$v['name']}' ";
         }
 
-        return Yii::$app->db->createCommand( '
+        return Yii::$app->db->createCommand( "
                     SELECT
                         * , id as d
-                        ' . $ss . '
+                        {$ss}
                     FROM
-                        ' . $this->table . '
+                        {$this->table}
                     WHERE
-                        data_id=' . $hist['data_id'] . '
+                        data_id={$hist['data_id']}
                     ORDER BY
                         id desc
                     ;
-                ' )->queryOne();
+                " )->queryOne();
 
     }
 

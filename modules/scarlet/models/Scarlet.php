@@ -211,13 +211,13 @@ class Scarlet
         foreach ($fields as $key => &$value)
             $value['value'] = ( isset( $currentHistory[ $value['name'] ] ) ) ? $currentHistory[ $value['name'] ] : null;
 
-        return array(
+        return [
             'view'    => 'edit',
             'data'    => $data,
             'version' => $version,
             'area'    => $area,
             'fields'  => $fields,
-        );
+        ];
 
     }
 
@@ -347,9 +347,9 @@ class Scarlet
         {
 
             // pega historico, caso upload vazio permanece valores antigos
-            $data           = ( new ScarletData() )->getData( $id );
+            $data           = ( new ScarletData()    )->getData( $id );
             $currentHistory = ( new ScarletHistory() )->getById( $data['id'] );
-            $fields         = ( new ScarletField() )->getFields( $versao );
+            $fields         = ( new ScarletField()   )->getFields( $versao );
 
 
             foreach ($fields as $key => &$value)
@@ -429,9 +429,9 @@ class Scarlet
     {
 
         $area    = $this->oArea->detalhes();
-        $version = ( new ScarletVersion() )->getAtual( $area['id'] );             // pega versao atual
-        $data    = ( new ScarletData() )->getListRaw( $area['id'], $version, 1 ); // lista dados
-        $fields  = ( new ScarletField() )->getFields( $version );                 // pega os fields da versao atual
+        $version = ( new ScarletVersion() )->getAtual( $area['id'] );                // pega versao atual
+        $data    = ( new ScarletData()    )->getListRaw( $area['id'], $version, 1 ); // lista dados
+        $fields  = ( new ScarletField()   )->getFields( $version );                  // pega os fields da versao atual
 
         foreach ($data as $k => &$v)
         {
@@ -462,8 +462,8 @@ class Scarlet
     public function search(array $op = [])
     {
         $area    = $this->oArea->detalhes();
-        $version = ( new ScarletVersion() )->getAtual( $area['id'] );          // pega versao atual
-        $fields  = ( new ScarletField() )->getFields( $version );              // pega os fields da versao atual
+        $version = ( new ScarletVersion() )->getAtual( $area['id'] ); // pega versao atual
+        $fields  = ( new ScarletField()   )->getFields( $version );   // pega os fields da versao atual
 
         return ( new ScarletData() )->search( $area['id'], $version, $op ); // lista dados
     }
@@ -511,8 +511,8 @@ class Scarlet
     public function edtView( array $arr = [] )
     {
         $area    = $this->oArea->detalhes();
-        $version = ( new ScarletVersion() )->getAtual(  $area['id'] );          // pega versao atual
-        $fields  = ( new ScarletField()   )->getFields( $version );              // pega os fields da versao atual
+        $version = ( new ScarletVersion() )->getAtual(  $area['id'] ); // pega versao atual
+        $fields  = ( new ScarletField()   )->getFields( $version );    // pega os fields da versao atual
         $json    = [];
 
         foreach ( $fields as $key => &$value )
