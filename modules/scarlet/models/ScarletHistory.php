@@ -306,21 +306,21 @@ class ScarletHistory extends Model
             if($k!=count($fields))
                 $ss .=', ';
 
-            $ss .= ' ( SELECT value FROM ' . $this->tInput[$v['type']] . ' WHERE history_id=' . $this->table . '.id and field_id='.$v['id'].' ) as ' . $v['name'];
+            $ss .= " ( SELECT value FROM {$this->tInput[$v['type']]} WHERE history_id={$this->table}.id and field_id={$v['id']} ) as {$v['name']} ";
         }
 
-        return Yii::$app->db->createCommand( '
+        return Yii::$app->db->createCommand( "
                     SELECT
                         date_creation as last_update
-                        ' . $ss . '
+                        {$ss}
                     FROM
-                        ' . $this->table . '
+                        {$this->table}
                     WHERE
-                        data_id=' . $data_id . '
+                        data_id={$data_id}
                     ORDER BY
                         id desc
                     ;
-                ' )->queryOne();
+                " )->queryOne();
 
     }
 

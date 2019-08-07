@@ -44,7 +44,7 @@ class ScarletArea extends Model
      */
     public function listar( $query = null )
     {
-        return Yii::$app->db->createCommand("SELECT * FROM scarlet_area $query")->queryAll();
+        return Yii::$app->db->createCommand("SELECT * FROM scarlet_area {$query}")->queryAll();
     }
 
 
@@ -57,9 +57,7 @@ class ScarletArea extends Model
     public function detalhes()
     {
         $x = Yii::$app->db->createCommand( "SELECT * FROM scarlet_area WHERE id=:id" )
-            ->bindValues([
-                ':id' => $this->area
-                ])
+            ->bindValues([ ':id' => $this->area ])
             ->queryOne();
 
         if(!$x)
@@ -100,9 +98,7 @@ class ScarletArea extends Model
     public function detalhesId( $id )
     {
         $x = Yii::$app->db->createCommand( "SELECT * FROM scarlet_area WHERE id=:id" )
-            ->bindValues([
-                ':id' => $id
-                ])
+            ->bindValues([ ':id' => $id ])
             ->queryOne();
 
         if(!$x)
@@ -128,7 +124,7 @@ class ScarletArea extends Model
         {
             $url = Yii::$app->ScarletHelper->urlAmigavel( $arr['name'] );
 
-            if( Yii::$app->db->createCommand("SELECT * FROM scarlet_area WHERE url LIKE '$url' ")->queryOne() )
+            if( Yii::$app->db->createCommand("SELECT * FROM scarlet_area WHERE url LIKE '{$url}' ")->queryOne() )
                 throw new Exception("Título Inválido", 1);
 
             $fields = json_decode( $arr['json'], true );
@@ -221,13 +217,13 @@ class ScarletArea extends Model
         {
             $fields = json_decode( $arr['json'], true );
 
-            Yii::$app->db->createCommand()->update( 'scarlet_area', ['label' => $arr['name'] ], 'id=' . $arr['id'] )->execute();
+            Yii::$app->db->createCommand()->update( 'scarlet_area', ['label' => $arr['name'] ], [ 'id' => $arr['id'] ] )->execute();
 
             $db          = Yii::$app->db;
             $transaction = $db->beginTransaction();
             $ti          = true;
 
-            Yii::$app->db->createCommand()->update( 'scarlet_version', ['active' => 0], 'area_id=' . $arr['id'] )->execute();
+            Yii::$app->db->createCommand()->update( 'scarlet_version', ['active' => 0], [ 'area_id' => $arr['id'] ] )->execute();
 
             Yii::$app->db->createCommand()->insert( 'scarlet_version', [
                 'area_id' => $arr['id'],
@@ -302,7 +298,7 @@ class ScarletArea extends Model
      */
     public function ativarArea()
     {
-        Yii::$app->db->createCommand()->update( 'scarlet_area', ['status' => 1], 'id=' . $this->area )->execute();
+        Yii::$app->db->createCommand()->update( 'scarlet_area', ['status' => 1], ['id' => $this->area ] )->execute();
     }
 
 
@@ -314,7 +310,7 @@ class ScarletArea extends Model
      */
     public function desativarArea()
     {
-        Yii::$app->db->createCommand()->update( 'scarlet_area', ['status' => 0], 'id=' . $this->area )->execute();
+        Yii::$app->db->createCommand()->update( 'scarlet_area', ['status' => 0], [ 'id' => $this->area ] )->execute();
     }
 
 

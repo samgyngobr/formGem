@@ -268,7 +268,7 @@ class ScarletData extends Model
      */
     public function delete( $id )
     {
-        Yii::$app->db->createCommand()->update( $this->table, ['deleted' => 1], 'id=' . $id )->execute();
+        Yii::$app->db->createCommand()->update( $this->table, ['deleted' => 1], ['id' => $id ] )->execute();
     }
 
 
@@ -283,7 +283,7 @@ class ScarletData extends Model
      */
     public function publicar( $id )
     {
-        Yii::$app->db->createCommand()->update( $this->table, ['published' => 1], 'id=' . $id )->execute();
+        Yii::$app->db->createCommand()->update( $this->table, ['published' => 1], [ 'id' => $id ] )->execute();
     }
 
 
@@ -298,7 +298,7 @@ class ScarletData extends Model
      */
     public function removerPublicacao( $id )
     {
-        Yii::$app->db->createCommand()->update( $this->table, ['published' => 0], 'id=' . $id )->execute();
+        Yii::$app->db->createCommand()->update( $this->table, ['published' => 0], [ 'id' => $id ] )->execute();
     }
 
 

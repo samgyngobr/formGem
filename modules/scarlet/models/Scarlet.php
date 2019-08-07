@@ -511,8 +511,8 @@ class Scarlet
     public function edtView( array $arr = [] )
     {
         $area    = $this->oArea->detalhes();
-        $version = ( new ScarletVersion() )->getAtual( $area['id'] );          // pega versao atual
-        $fields  = ( new ScarletField() )->getFields( $version );              // pega os fields da versao atual
+        $version = ( new ScarletVersion() )->getAtual(  $area['id'] );          // pega versao atual
+        $fields  = ( new ScarletField()   )->getFields( $version );              // pega os fields da versao atual
         $json    = [];
 
         foreach ( $fields as $key => &$value )
