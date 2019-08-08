@@ -41,8 +41,9 @@ class ConfigurationController extends Controller
     {
         try
         {
-            $areas = ( new Scarlet() )->listarAreas();
+            $this->view->title = 'Configuração';
 
+            $areas = ( new Scarlet() )->listarAreas();
 
             if($_SESSION['error'] != '')
             {
@@ -77,6 +78,8 @@ class ConfigurationController extends Controller
     {
         try
         {
+            $this->view->title = 'Configuração';
+
             $areas = ( new Scarlet() )->listarAreas( 'WHERE status=1 ' );
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -109,6 +112,8 @@ class ConfigurationController extends Controller
         {
             $dados        = [];
             $dados['url'] = Yii::$app->request->get('url');   // parametro passado pela url referente ao registro do banco
+
+            $this->view->title = 'Configuração';
 
             $obj           = new Scarlet();
             $obj->setArea($dados['url']);

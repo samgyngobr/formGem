@@ -1,8 +1,3 @@
-<?php
-
-$this->title = $config['area']['label'] . ( ( isset($config['acao']) AND $config['acao'] == 'novo' ) ? ' - Novo' : ( ( isset($config['acao']) AND $config['acao'] == 'editar' ) ? ' - Editar ' : '' ) );
-
-?>
 
 <div class="row">
     <div class="col-sm-12">

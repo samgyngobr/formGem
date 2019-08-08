@@ -58,10 +58,8 @@ class DefaultController extends Controller
             $area       = $objScarlet->getArea()->detalhes();
 
 
-
             if ($_SERVER['REQUEST_METHOD'] == 'POST')
             {
-
                 try
                 {
 
@@ -161,6 +159,17 @@ class DefaultController extends Controller
 
             $view = $dados['config']['view'];
 
+            if($view=='index')
+                $this->view->title = $dados['config']['area']['label'];
+            else
+                $this->view->title = $dados['config']['area']['label']
+                    . (
+                        ( isset($dados['config']['acao']) AND $dados['config']['acao'] == 'novo' )
+                        ? ' - Novo'
+                        : ( ( isset($dados['config']['acao']) AND $dados['config']['acao'] == 'editar' )
+                            ? ' - Editar '
+                            : '' )
+                    );
 
         }
         catch(Exception $e)
@@ -202,7 +211,8 @@ class DefaultController extends Controller
             $objScarlet->setArea( $dados['area'] );
             $area       = $objScarlet->getArea()->detalhes();
 
-            $dados['area'] = $area;
+            $dados['area']     = $area;
+            $this->view->title = 'Galeria - ' . $dados['area']['label'];
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST')
             {

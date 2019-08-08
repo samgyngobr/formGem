@@ -1,8 +1,3 @@
-<?php
-
-$this->title = $config['area']['label'];
-
-?>
 
 <div class="row">
     <div class="col-sm-12">
@@ -48,7 +43,7 @@ $this->title = $config['area']['label'];
         ?>
 
         <p>
-            <a class="btn btn-primary" href="<?= Yii::getAlias('@root') . '/admin/sca/' . $area . '/novo' ; ?>">Novo</a>
+            <a class="btn btn-primary" href="<?= Yii::getAlias('@root') . "/admin/sca/{$area}/novo" ; ?>">Novo</a>
         </p>
 
 

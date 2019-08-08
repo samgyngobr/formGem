@@ -1,8 +1,3 @@
-<?php
-
-$this->title = 'Configuração';
-
-?>
 
 <div class="row">
     <div class="col-sm-12">
