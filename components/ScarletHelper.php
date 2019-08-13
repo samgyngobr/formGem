@@ -46,50 +46,50 @@ class ScarletHelper extends Component
             {
 
                 case '1': // text
-                    $str .= '
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
-                        <div class="col-md-6">
-                            <input type="text" id="' . $value['name'] . '" class="form-control" placeholder="' . $value['label'] . '" name="' . $value['name'] . '" value="' . ( isset( $value['value'] ) ? $value['value'] : '' ) . '" ' . $required . ' >
+                    $str .= "
+                    <div class='form-group'>
+                        <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
+                        <div class='col-md-6'>
+                            <input type='text' id='{$value['name']}' class='form-control' placeholder='{$value['label']}' name='{$value['name']}' value='{$value['value']}' {$required} >
                         </div>
                     </div>
-                    ';
+                    ";
                     break;
 
 
                 case '2': // integer
-                    $str .= '
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
-                        <div class="col-md-6">
-                            <input type="text" id="' . $value['name'] . '" class="form-control integer" placeholder="' . $value['label'] . '" name="' . $value['name'] . '" value="' . ( isset( $value['value'] ) ? $value['value'] : '' ) . '" ' . $required . ' >
+                    $str .= "
+                    <div class='form-group'>
+                        <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
+                        <div class='col-md-6'>
+                            <input type='text' id='{$value['name']}' class='form-control integer' placeholder='{$value['label']}' name='{$value['name']}' value='{$value['value']}' {$required} >
                         </div>
                     </div>
-                    ';
+                    ";
                     break;
 
 
                 case '3': // double
-                    $str .= '
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
-                        <div class="col-md-6">
-                            <input type="text" id="' . $value['name'] . '" class="form-control double" placeholder="' . $value['label'] . '" name="' . $value['name'] . '" value="' . ( isset( $value['value'] ) ? $value['value'] : '' ) . '" ' . $required . ' data-parsley-pattern="^[0-9]+(\\.[0-9]+)?$" >
+                    $str .= "
+                    <div class='form-group'>
+                        <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
+                        <div class='col-md-6'>
+                            <input type='text' id='{$value['name']}' class='form-control double' placeholder='{$value['label']}' name='{$value['name']}' value='{$value['value']}' {$required} data-parsley-pattern='^[0-9]+(\\.[0-9]+)?$' >
                         </div>
                     </div>
-                    ';
+                    ";
                     break;
 
 
                 case '4': // TextArea
-                    $str .= '
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="' . $value['name'] . '">' . $value['label'] . '</label>
-                        <div class="col-md-6">
-                            <textarea class="text-input textarea ckeditor" id="' . $value['name'] . '" name="' . $value['name'] . '" cols="79" rows="10"  ' . $required . ' >' . ( isset( $value['value'] ) ? $value['value'] : '' ) . '</textarea>
+                    $str .= "
+                    <div class='form-group'>
+                        <label class='control-label col-md-2' for='{$value['name']}' >{$value['label']}</label>
+                        <div class='col-md-6'>
+                            <textarea class='text-input textarea ckeditor' id='{$value['name']}' name='{$value['name']}' {$required} >{$value['value']}</textarea>
                         </div>
                     </div>
-                    ';
+                    ";
                     break;
 
 
