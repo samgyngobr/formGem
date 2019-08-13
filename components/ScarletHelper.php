@@ -94,39 +94,39 @@ class ScarletHelper extends Component
 
 
                 case '5': // select
-                    $str .= '
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
-                        <div class="col-md-6">
-                            <select id="' . $value['name'] . '" class="form-control" name="' . $value['name'] . '" ' . $required . ' >
-                                <option value="">Selecione uma opção</option>
-                                ';
+                    $str .= "
+                    <div class='form-group'>
+                        <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
+                        <div class='col-md-6'>
+                            <select id='{$value['name']}' class='form-control' name='{$value['name']}' {$required} >
+                                <option value=''>Selecione uma opção</option>
+                                ";
 
-                                foreach ( $value['options'] as $k => $v )
-                                    $str .= '<option value="' . $v['value'] . '" ' . ( $value['value'] == $v['value'] ? ' selected="selected" ' : '' ) .' >' . $v['name'] . '</option>';
+                    foreach ( $value['options'] as $k => $v )
+                        $str .= "<option value='{$v['value']}' " . ( $value['value'] == $v['value'] ? ' selected="selected" ' : '' ) . " >{$v['name']}</option>";
 
-                                $str .= '
+                    $str .= "
                             </select>
                         </div>
                     </div>
-                    ';
+                    ";
                     break;
 
 
                 case '6': // radio
-                    $str .= '
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
-                        <div class="col-md-6">
-                            ';
+                    $str .= "
+                    <div class='form-group'>
+                        <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
+                        <div class='col-md-6'>
+                            ";
 
                     foreach ( $value['options'] as $k => $v )
-                        $str .= '
-                            <div class="radio radio-inline">
-                                <input id="'.$value['name'].'-'.$k.'" value="' . $v['value'] . '" name="' . $value['name'] . '" type="radio" ' . ( ( $v['value'] == $value['value'] ) ? 'checked="checked"' : '' ) . ' >
-                                <label for="'.$value['name'].'-'.$k.'">' . $v['name'] . '</label>
+                        $str .= "
+                            <div class='radio radio-inline'>
+                                <input  id='{$value['name']}-{$k}' value='{$v['value']}' name='{$value['name']}' type='radio' " . ( ( $v['value'] == $value['value'] ) ? 'checked="checked"' : '' ) . " >
+                                <label for='{$value['name']}-{$k}' >{$v['name']}</label>
                             </div>
-                        ';
+                        ";
 
                     $str .= '
                         </div>
@@ -136,21 +136,21 @@ class ScarletHelper extends Component
 
 
                 case '7': // checkbox
-                    $str .= '
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
-                        <div class="col-md-6">
-                            ';
+                    $str .= "
+                    <div class='form-group'>
+                        <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
+                        <div class='col-md-6'>
+                            ";
 
                             foreach ( $value['options'] as $k => $v )
-                                $str .= '
-                                    <div class="checkbox checkbox-inline">
-                                        <input id="'.$value['name'].'-'.$k.'" value="' . $v['value'] . '" name="' . $value['name'] . '[]" type="checkbox" ' . ( in_array( $v['value'], explode( ';', $value['value'] ) ) ? 'checked="checked"' : '' ) . ' >
-                                        <label for="'.$value['name'].'-'.$k.'">' . $v['name'] . '</label>
+                                $str .= "
+                                    <div class='checkbox checkbox-inline'>
+                                        <input  id='{$value['name']}-{$k}' value='{$v['value']}' name='{$value['name']}[]' type='checkbox' " . ( in_array( $v['value'], explode( ';', $value['value'] ) ) ? 'checked="checked"' : '' ) . " >
+                                        <label for='{$value['name']}-{$k}' >{$v['name']}</label>
                                     </div>
-                                ';
+                                ";
 
-                            $str .= '
+                    $str .= '
                         </div>
                     </div>
                     ';
@@ -159,43 +159,43 @@ class ScarletHelper extends Component
 
                 case '8': // image
                     if( !isset( $value['value'] ) )
-                        $btn = '<input type="file" class="form-control" name="' . $value['name'] . '" ' . ( ( $acao=='editar' ) ? '' : $required ) . ' >';
+                        $btn = "<input type='file' class='form-control' name='{$value['name']}' " . ( ( $acao=='editar' ) ? '' : $required ) . " >";
                     else
-                        $btn = '<div class="input-group">
-                                <input type="file" class="form-control" name="' . $value['name'] . '" ' . ( ( $acao=='editar' ) ? '' : $required ) . ' >
-                                <span class="input-group-btn">
-                                    <a class="btn btn-default" href="' . Yii::getAlias( '@web/uploads/files/' . $value['value'] ) . '" target="_blank" ><i class="fa fa-download"></i></a>
+                        $btn = "<div class='input-group'>
+                                <input type='file' class='form-control' name='{$value['name']}' " . ( ( $acao=='editar' ) ? '' : $required ) . " >
+                                <span class='input-group-btn'>
+                                    <a class='btn btn-default' href='" . Yii::getAlias( '@web/uploads/files/' . $value['value'] ) . "' target='_blank' ><i class='fa fa-download'></i></a>
                                 </span>
-                            </div>';
-                    $str .= '
-                        <div class="form-group">
-                            <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
-                            <div class="col-md-6">
-                                ' . $btn . '
+                            </div>";
+                    $str .= "
+                        <div class='form-group'>
+                            <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
+                            <div class='col-md-6'>
+                                {$btn}
                             </div>
                         </div>
-                        ';
+                        ";
                     break;
 
 
                 case '9': // upload
                     if( !isset( $value['value'] ) )
-                        $btn = '<input type="file" class="form-control" name="' . $value['name'] . '" ' . ( ( $acao=='editar' ) ? '' : $required ) . ' >';
+                        $btn = "<input type='file' class='form-control' name='{$value['name']}' " . ( ( $acao=='editar' ) ? '' : $required ) . ' >';
                     else
-                        $btn = '<div class="input-group">
-                                <input type="file" class="form-control" name="' . $value['name'] . '" ' . ( ( $acao=='editar' ) ? '' : $required ) . ' >
-                                <span class="input-group-btn">
-                                    <a class="btn btn-default" href="' . Yii::getAlias( '@web/uploads/files/' . $value['value'] ) . '" target="_blank" ><i class="fa fa-download"></i></a>
+                        $btn = "<div class='input-group'>
+                                <input type='file' class='form-control' name='{$value['name']}' " . ( ( $acao=='editar' ) ? '' : $required ) . " >
+                                <span class='input-group-btn'>
+                                    <a class='btn btn-default' href='" . Yii::getAlias( '@web/uploads/files/' . $value['value'] ) . "' target='_blank' ><i class='fa fa-download'></i></a>
                                 </span>
-                            </div>';
-                    $str .= '
-                        <div class="form-group">
-                            <label class="control-label col-md-2" for="general-text" for="' . $value['name'] . '">' . $value['label'] . '</label>
-                            <div class="col-md-6">
-                                ' . $btn . '
+                            </div>";
+                    $str .= "
+                        <div class='form-group' >
+                            <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
+                            <div class='col-md-6'>
+                                {$btn}
                             </div>
                         </div>
-                        ';
+                        ";
                     break;
 
 
@@ -240,7 +240,7 @@ class ScarletHelper extends Component
 
             foreach ($fieldLabels as $key => $value)
             {
-                $str      .= '<th>' . $value['label'] . '</th>';
+                $str      .= "<th>{$value['label']}</th>";
                 $labels[]  = $value['name'];
             }
 
@@ -261,7 +261,7 @@ class ScarletHelper extends Component
                 $str .= '<tr>';
 
                 foreach ($labels as $key => $value)
-                    $str .= '<td>' . $v['fields'][$value] . '</td>';
+                    $str .= "<td>{$v['fields'][$value]}</td>";
 
                 $str .= '<td style=" width: 15%; " >' . date( 'd/m/Y H:i:s', strtotime( $v['fields']['last_update'] ) ) . '</td>';
 
