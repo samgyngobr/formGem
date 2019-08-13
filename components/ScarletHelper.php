@@ -142,13 +142,13 @@ class ScarletHelper extends Component
                         <div class='col-md-6'>
                             ";
 
-                            foreach ( $value['options'] as $k => $v )
-                                $str .= "
-                                    <div class='checkbox checkbox-inline'>
-                                        <input  id='{$value['name']}-{$k}' value='{$v['value']}' name='{$value['name']}[]' type='checkbox' " . ( in_array( $v['value'], explode( ';', $value['value'] ) ) ? 'checked="checked"' : '' ) . " >
-                                        <label for='{$value['name']}-{$k}' >{$v['name']}</label>
-                                    </div>
-                                ";
+                    foreach ( $value['options'] as $k => $v )
+                        $str .= "
+                            <div class='checkbox checkbox-inline'>
+                                <input  id='{$value['name']}-{$k}' value='{$v['value']}' name='{$value['name']}[]' type='checkbox' " . ( in_array( $v['value'], explode( ';', $value['value'] ) ) ? 'checked="checked"' : '' ) . " >
+                                <label for='{$value['name']}-{$k}' >{$v['name']}</label>
+                            </div>
+                        ";
 
                     $str .= '
                         </div>
