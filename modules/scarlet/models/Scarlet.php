@@ -209,7 +209,9 @@ class Scarlet
 
         // mescla os campos com seus valores
         foreach ($fields as $key => &$value)
-            $value['value'] = ( isset( $currentHistory[ $value['name'] ] ) ) ? $currentHistory[ $value['name'] ] : null;
+            $value['value'] = ( isset( $currentHistory[ $value['name'] ] ) )
+                                    ? $currentHistory[ $value['name'] ]
+                                    : null;
 
         return [
             'view'    => 'edit',
@@ -406,7 +408,9 @@ class Scarlet
 
         // mescla os campos com seus valores
         foreach ($fields as $key => &$value)
-            $value['value'] = ( isset( $currentHistory[ $value['name'] ] ) ) ? $currentHistory[ $value['name'] ] : null;
+            $value['value'] = ( isset( $currentHistory[ $value['name'] ] ) )
+                                ? $currentHistory[ $value['name'] ]
+                                : null;
 
         $ret = [];
 
@@ -440,7 +444,9 @@ class Scarlet
 
             // mescla os campos com seus valores
             foreach ($fields as $key => $value)
-                $v[ $value['name'] ] = ( isset( $currentHistory[ $value['name'] ] ) ) ? $currentHistory[ $value['name'] ] : null;
+                $v[ $value['name'] ] = ( isset( $currentHistory[ $value['name'] ] ) )
+                                        ? $currentHistory[ $value['name'] ]
+                                        : null;
 
         } // foreach ($data as $key => &$value)
 

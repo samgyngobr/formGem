@@ -304,7 +304,15 @@ class ScarletHistory extends Model
             if($k!=count($fields))
                 $ss .=', ';
 
-            $ss .= " ( SELECT value FROM {$this->tInput[$v['type']]} WHERE history_id={$this->table}.id and field_id={$v['id']} ) as {$v['name']} ";
+            $ss .= " (
+                        SELECT
+                            value
+                        FROM
+                            {$this->tInput[$v['type']]}
+                        WHERE
+                                history_id={$this->table}.id
+                            AND   field_id={$v['id']}
+                    ) as {$v['name']} ";
         }
 
         return Yii::$app->db->createCommand( "

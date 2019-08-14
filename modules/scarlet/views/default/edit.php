@@ -45,7 +45,7 @@
 
         <?php if( $config['area']['multiple'] == 1 ){ ?>
         <p>
-            <a class="btn btn-primary" href="<?= Yii::getAlias('@web') . '/admin/sca/' . $config['area']['url']; ?>">Voltar</a>
+            <a class="btn btn-primary" href="<?= Yii::getAlias('@web/admin/sca/') . $config['area']['url']; ?>">Voltar</a>
         </p>
         <?php } ?>
 
