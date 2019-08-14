@@ -44,7 +44,17 @@ class ScarletHistory extends Model
     public function getData( $config )
     {
 
-        $data = Yii::$app->db->createCommand( "SELECT * FROM scarlet_history WHERE version_id=:version_id AND published=:published ORDER BY date_creation DESC" )
+        $data = Yii::$app->db->createCommand( "
+                SELECT
+                    *
+                FROM
+                    scarlet_history
+                WHERE
+                        version_id=:version_id
+                    AND  published=:published
+                ORDER BY
+                    date_creation DESC
+                " )
             ->bindValues([
                 ':version_id' => $config['version_id'],
                 ':published'  => $config['published'],
@@ -130,7 +140,9 @@ class ScarletHistory extends Model
         try
         {
 
-            Yii::$app->db->createCommand()->update( $this->table, ['current' => 0], [ 'data_id' => $arr['data_id'] ] )->execute();
+            Yii::$app->db->createCommand()
+                ->update( $this->table, ['current' => 0], [ 'data_id' => $arr['data_id'] ] )
+                ->execute();
 
             // cria nova versao
             Yii::$app->db->createCommand()->insert( $this->table, [
@@ -171,7 +183,7 @@ class ScarletHistory extends Model
                         'value'      => $arr['post'][ $value['name'] ],
                     ])->execute();
 
-            } // foreach ( $arr['fields'] as $key => $value ) {
+            } // foreach ( $arr['fields'] as $key => $value )
 
 
             if( !$ti )
@@ -204,7 +216,16 @@ class ScarletHistory extends Model
     public function getById( $data_id )
     {
 
-        $hist = Yii::$app->db->createCommand( "SELECT * FROM scarlet_history WHERE data_id=:data_id ORDER BY date_creation DESC" )
+        $hist = Yii::$app->db->createCommand( "
+                SELECT
+                    *
+                FROM
+                    scarlet_history
+                WHERE
+                    data_id=:data_id
+                ORDER BY
+                    date_creation DESC
+            " )
             ->bindValues([ ':data_id' => $data_id ])
             ->queryOne();
 
@@ -263,21 +284,37 @@ class ScarletHistory extends Model
 
             // checkbox pode possuir mais de um valor
             if( $v['type'] == 7 )
-                $ss .= " ( SELECT GROUP_CONCAT( value separator ';' ) FROM {$this->tInput[$v['type']]} WHERE history_id=d and field_id={$v['id']} ) as '{$v['name']}' ";
+                $ss .= " (
+                            SELECT
+                                GROUP_CONCAT( value separator ';' )
+                            FROM
+                                {$this->tInput[$v['type']]}
+                            WHERE
+                                history_id=d and field_id={$v['id']}
+                        ) AS '{$v['name']}'
+                    ";
             else
-                $ss .= " ( SELECT value FROM {$this->tInput[$v['type']]} WHERE history_id=d and field_id={$v['id']} ) as '{$v['name']}' ";
+                $ss .= " (
+                            SELECT
+                                value
+                            FROM
+                                {$this->tInput[$v['type']]}
+                            WHERE
+                                history_id=d and field_id={$v['id']}
+                        ) AS '{$v['name']}'
+                    ";
         }
 
         return Yii::$app->db->createCommand( "
                     SELECT
-                        * , id as d
+                        * , id AS d
                         {$ss}
                     FROM
                         {$this->table}
                     WHERE
                         data_id={$hist['data_id']}
                     ORDER BY
-                        id desc
+                        id DESC
                     ;
                 " )->queryOne();
 

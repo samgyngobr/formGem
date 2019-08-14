@@ -35,9 +35,7 @@ class ScarletData extends Model
             $st = ' AND published=1 ';
 
         $x = Yii::$app->db->createCommand( "SELECT * FROM $this->table WHERE id=:id {$st}" )
-            ->bindValues([
-                ':id' => $area
-                ])
+            ->bindValues([ ':id' => $area ])
             ->queryOne();
 
         if(!$x)
@@ -84,17 +82,13 @@ class ScarletData extends Model
     public function getAtual( $area )
     {
         $x = Yii::$app->db->createCommand( "SELECT * FROM $this->table WHERE area_id=:area_id" )
-            ->bindValues([
-                ':area_id' => $area
-                ])
+            ->bindValues([ ':area_id' => $area ])
             ->queryOne();
 
         if(!$x)
         {
             $b = Yii::$app->db->createCommand( "SELECT * FROM scarlet_area WHERE id=:id" )
-                ->bindValues([
-                    ':id' => $area
-                    ])
+                ->bindValues([ ':id' => $area ])
                 ->queryOne();
 
             if( !$b or $b['multiple'] == 1 )
@@ -108,9 +102,7 @@ class ScarletData extends Model
             $data_id = Yii::$app->db->getLastInsertID();
 
             $v = Yii::$app->db->createCommand( "SELECT * FROM scarlet_version WHERE area_id=:id" )
-                ->bindValues([
-                    ':id' => $area
-                    ])
+                ->bindValues([ ':id' => $area ])
                 ->queryOne();
 
             Yii::$app->db->createCommand()->insert( 'scarlet_history', [
@@ -119,9 +111,7 @@ class ScarletData extends Model
             ])->execute();
 
             $x = Yii::$app->db->createCommand( "SELECT * FROM $this->table WHERE area_id=:area_id" )
-                ->bindValues([
-                    ':area_id' => $area
-                    ])
+                ->bindValues([ ':area_id' => $area ])
                 ->queryOne();
 
             if(!$x)
@@ -144,10 +134,16 @@ class ScarletData extends Model
      */
     public function getListBasic( $area, $version )
     {
-        $list = Yii::$app->db->createCommand( " SELECT * FROM $this->table WHERE deleted=0 AND area_id=:area_id " )
-            ->bindValues([
-                ':area_id' => $area
-                ])
+        $list = Yii::$app->db->createCommand( "
+                SELECT
+                    *
+                FROM
+                    {$this->table}
+                WHERE
+                        deleted=0
+                    AND area_id=:area_id
+            " )
+            ->bindValues([ ':area_id' => $area ])
             ->queryAll();
 
         foreach ($list as $key => &$value)

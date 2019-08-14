@@ -119,8 +119,8 @@ class Scarlet
     public function novo()
     {
         $area    = $this->oArea->detalhes();
-        $version = ( new ScarletVersion() )->getAtual( $area['id'] );
-        $fields  = ( new ScarletField() )->getFields( $version );
+        $version = ( new ScarletVersion() )->getAtual(  $area['id'] );
+        $fields  = ( new ScarletField()   )->getFields( $version );
 
         return array(
             'view'    => 'edit',
