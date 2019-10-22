@@ -40,7 +40,8 @@ class ScarletHelper extends Component
 
         foreach ($fields as $key => $value)
         {
-            $required = ( $value['required'] ) ? 'required' : '';
+            $required = ( $value['required']  ) ? 'required' : '';
+            $tip      = ( $value['tip'] != '' ) ? "<small>{$value[tip]}</small>" : '';
 
             switch ( $value['type'] )
             {
@@ -51,6 +52,7 @@ class ScarletHelper extends Component
                         <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
                         <div class='col-md-6'>
                             <input type='text' id='{$value['name']}' class='form-control' placeholder='{$value['label']}' name='{$value['name']}' value='{$value['value']}' {$required} >
+                            {$tip}
                         </div>
                     </div>
                     ";
@@ -58,11 +60,12 @@ class ScarletHelper extends Component
 
 
                 case '2': // integer
-                    $str .= "
+                $str .= "
                     <div class='form-group'>
                         <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
                         <div class='col-md-6'>
                             <input type='text' id='{$value['name']}' class='form-control integer' placeholder='{$value['label']}' name='{$value['name']}' value='{$value['value']}' {$required} >
+                            {$tip}
                         </div>
                     </div>
                     ";
@@ -75,6 +78,7 @@ class ScarletHelper extends Component
                         <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
                         <div class='col-md-6'>
                             <input type='text' id='{$value['name']}' class='form-control double' placeholder='{$value['label']}' name='{$value['name']}' value='{$value['value']}' {$required} data-parsley-pattern='^[0-9]+(\\.[0-9]+)?$' >
+                            {$tip}
                         </div>
                     </div>
                     ";
@@ -86,6 +90,7 @@ class ScarletHelper extends Component
                     <div class='form-group'>
                         <label class='control-label col-md-2' for='{$value['name']}' >{$value['label']}</label>
                         <div class='col-md-6'>
+                            {$tip}
                             <textarea class='text-input textarea ckeditor' id='{$value['name']}' name='{$value['name']}' {$required} >{$value['value']}</textarea>
                         </div>
                     </div>
@@ -107,6 +112,7 @@ class ScarletHelper extends Component
 
                     $str .= "
                             </select>
+                            {$tip}
                         </div>
                     </div>
                     ";
@@ -118,6 +124,7 @@ class ScarletHelper extends Component
                     <div class='form-group'>
                         <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
                         <div class='col-md-6'>
+                            {$tip}
                             ";
 
                     foreach ( $value['options'] as $k => $v )
@@ -140,6 +147,7 @@ class ScarletHelper extends Component
                     <div class='form-group'>
                         <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
                         <div class='col-md-6'>
+                            {$tip}
                             ";
 
                     foreach ( $value['options'] as $k => $v )
@@ -171,6 +179,7 @@ class ScarletHelper extends Component
                         <div class='form-group'>
                             <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
                             <div class='col-md-6'>
+                                {$tip}
                                 {$btn}
                             </div>
                         </div>
@@ -192,6 +201,7 @@ class ScarletHelper extends Component
                         <div class='form-group' >
                             <label class='control-label col-md-2' for='general-text' for='{$value['name']}' >{$value['label']}</label>
                             <div class='col-md-6'>
+                                {$tip}
                                 {$btn}
                             </div>
                         </div>
