@@ -216,10 +216,10 @@ class ScarletHelper extends Component
 
 
         $str .= '<div class="form-group form-actions">
-                        <div class="col-md-10 col-md-offset-2">
-                            <button type="submit" class="btn btn-success"><i class="icon-ok"></i> Salvar</button>
-                        </div>
-                    </div>';
+                    <div class="col-md-10 col-md-offset-2">
+                        <button type="submit" class="btn btn-success"><i class="icon-ok"></i> Salvar</button>
+                    </div>
+                </div>';
 
         $str .= '</form>';
 
