@@ -317,6 +317,8 @@ class ScarletHelper extends Component
         $url = str_replace('---', '-', $url);
         $url = str_replace('--', '-', $url);
         $url = str_replace(',', '', $url);
+        $url = str_replace('(', '', $url);
+        $url = str_replace(')', '', $url);
 
         return strtolower($url);
     }
